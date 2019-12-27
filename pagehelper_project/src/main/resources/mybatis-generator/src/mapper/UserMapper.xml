@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="zxy.demo.springboot.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="zxy.demo.springboot.entity.User" >
+    <id column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+    <result column="USER_GENDER" property="userGender" jdbcType="VARCHAR" />
+    <result column="USER_EMAIL" property="userEmail" jdbcType="VARCHAR" />
+    <result column="USER_PHONE" property="userPhone" jdbcType="VARCHAR" />
+    <result column="USER_ADDRESS" property="userAddress" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Criteria_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    USER_ID, USER_NAME, USER_GENDER, USER_EMAIL, USER_PHONE, USER_ADDRESS
+  </sql>
+  <select id="selectByCriteria" resultMap="BaseResultMap" parameterType="zxy.demo.springboot.entity.UserCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from USER
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from USER
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByCriteria" parameterType="zxy.demo.springboot.entity.UserCriteria" >
+    delete from USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="zxy.demo.springboot.entity.User" >
+    insert into USER (USER_ID, USER_NAME, USER_GENDER, 
+      USER_EMAIL, USER_PHONE, USER_ADDRESS
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userGender,jdbcType=VARCHAR}, 
+      #{userEmail,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, #{userAddress,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="zxy.demo.springboot.entity.User" >
+    insert into USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
+      <if test="userGender != null" >
+        USER_GENDER,
+      </if>
+      <if test="userEmail != null" >
+        USER_EMAIL,
+      </if>
+      <if test="userPhone != null" >
+        USER_PHONE,
+      </if>
+      <if test="userAddress != null" >
+        USER_ADDRESS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userGender != null" >
+        #{userGender,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null" >
+        #{userAddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByCriteria" parameterType="zxy.demo.springboot.entity.UserCriteria" resultType="java.lang.Integer" >
+    select count(*) from USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByCriteriaSelective" parameterType="map" >
+    update USER
+    <set >
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        USER_NAME = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userGender != null" >
+        USER_GENDER = #{record.userGender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userEmail != null" >
+        USER_EMAIL = #{record.userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPhone != null" >
+        USER_PHONE = #{record.userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAddress != null" >
+        USER_ADDRESS = #{record.userAddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Criteria_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByCriteria" parameterType="map" >
+    update USER
+    set USER_ID = #{record.userId,jdbcType=VARCHAR},
+      USER_NAME = #{record.userName,jdbcType=VARCHAR},
+      USER_GENDER = #{record.userGender,jdbcType=VARCHAR},
+      USER_EMAIL = #{record.userEmail,jdbcType=VARCHAR},
+      USER_PHONE = #{record.userPhone,jdbcType=VARCHAR},
+      USER_ADDRESS = #{record.userAddress,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Criteria_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="zxy.demo.springboot.entity.User" >
+    update USER
+    <set >
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userGender != null" >
+        USER_GENDER = #{userGender,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        USER_EMAIL = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        USER_PHONE = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null" >
+        USER_ADDRESS = #{userAddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="zxy.demo.springboot.entity.User" >
+    update USER
+    set USER_NAME = #{userName,jdbcType=VARCHAR},
+      USER_GENDER = #{userGender,jdbcType=VARCHAR},
+      USER_EMAIL = #{userEmail,jdbcType=VARCHAR},
+      USER_PHONE = #{userPhone,jdbcType=VARCHAR},
+      USER_ADDRESS = #{userAddress,jdbcType=VARCHAR}
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="zxy.demo.springboot.entity.UserCriteria" id="selectByCriteriaWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

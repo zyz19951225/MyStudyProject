@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <classPathEntry location="E:\tool\ojdbc6.jar"/>
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"/>
+        <!-- <plugin type="mybatis.generator.plugins.ModelCommentsPlugin"/>
+				-->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@20.26.11.5:1521/CSHP02" userId="osdf_kf"
+                        password="osdf_kf">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="demo.entity" targetProject=".\src">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="demo.mapper" targetProject=".\src">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="demo.dao" targetProject=".\src">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table tableName="test_user" domainObjectName="TestUser">
+            <generatedKey column="user_id" sqlStatement="MySql" identity="true"/>
+        </table>
+
+    </context>
+</generatorConfiguration>
