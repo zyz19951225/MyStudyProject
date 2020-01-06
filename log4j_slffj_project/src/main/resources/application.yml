@@ -1,4 +1,29 @@
 
+server:
+  port: 9999
+
+
+
+spring:
+    profiles:
+        active: dev
+    datasource:
+        name: test
+        url: jdbc:mysql://127.0.0.1:3306/test?serverTimezone=UTC
+        username: root
+        password: 123456
+        driver-class-name: com.mysql.cj.jdbc.Driver
+#        type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis:
+        mapper-locations: classpath:mapping/*.xml
+#        type-aliases-package: com.winter.model
+#        ÍÕ·åÃüÃû¿ªÆô
+        configuration:
+          map-underscore-to-camel-case: true
+
+
+
 logging:
   file:
     path: D:/nz-workspace/logback

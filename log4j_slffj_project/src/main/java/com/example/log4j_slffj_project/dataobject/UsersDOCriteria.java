@@ -3,7 +3,7 @@ package com.example.log4j_slffj_project.dataobject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDOCriteria {
+public class UsersDOCriteria {
     protected String orderByClause;
 
     protected int page = -1;
@@ -14,7 +14,7 @@ public class UserDOCriteria {
 
     protected List<Criteria> oredCriteria;
 
-    public UserDOCriteria() {
+    public UsersDOCriteria() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

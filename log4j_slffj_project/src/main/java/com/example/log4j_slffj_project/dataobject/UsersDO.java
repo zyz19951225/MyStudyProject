@@ -1,6 +1,6 @@
 package com.example.log4j_slffj_project.dataobject;
 
-public class UserDO {
+public class UsersDO {
     private Integer id;
 
     private String name;

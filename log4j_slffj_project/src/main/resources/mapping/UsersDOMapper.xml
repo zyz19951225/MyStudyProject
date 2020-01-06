@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.log4j_slffj_project.dao.UserDOMapper" >
-  <resultMap id="BaseResultMap" type="com.example.log4j_slffj_project.dataobject.UserDO" >
+<mapper namespace="com.example.log4j_slffj_project.dao.UsersDOMapper" >
+  <resultMap id="BaseResultMap" type="com.example.log4j_slffj_project.dataobject.UsersDO" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="py" property="py" jdbcType="VARCHAR" />
@@ -67,7 +67,7 @@
   <sql id="Base_Column_List" >
     id, name, py
   </sql>
-  <select id="selectByCriteria" resultMap="BaseResultMap" parameterType="com.example.log4j_slffj_project.dataobject.UserDOCriteria" >
+  <select id="selectByCriteria" resultMap="BaseResultMap" parameterType="com.example.log4j_slffj_project.dataobject.UsersDOCriteria" >
     select
     <if test="distinct" >
       distinct
@@ -91,17 +91,17 @@
     delete from users
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByCriteria" parameterType="com.example.log4j_slffj_project.dataobject.UserDOCriteria" >
+  <delete id="deleteByCriteria" parameterType="com.example.log4j_slffj_project.dataobject.UsersDOCriteria" >
     delete from users
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.log4j_slffj_project.dataobject.UserDO" >
+  <insert id="insert" parameterType="com.example.log4j_slffj_project.dataobject.UsersDO" >
     insert into users (id, name, py)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{py,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.log4j_slffj_project.dataobject.UserDO" >
+  <insert id="insertSelective" parameterType="com.example.log4j_slffj_project.dataobject.UsersDO" >
     insert into users
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -126,7 +126,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByCriteria" parameterType="com.example.log4j_slffj_project.dataobject.UserDOCriteria" resultType="java.lang.Integer" >
+  <select id="countByCriteria" parameterType="com.example.log4j_slffj_project.dataobject.UsersDOCriteria" resultType="java.lang.Integer" >
     select count(*) from users
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -158,7 +158,7 @@
       <include refid="Update_By_Criteria_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.log4j_slffj_project.dataobject.UserDO" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.log4j_slffj_project.dataobject.UsersDO" >
     update users
     <set >
       <if test="name != null" >
@@ -170,13 +170,13 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.log4j_slffj_project.dataobject.UserDO" >
+  <update id="updateByPrimaryKey" parameterType="com.example.log4j_slffj_project.dataobject.UsersDO" >
     update users
     set name = #{name,jdbcType=VARCHAR},
       py = #{py,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select resultMap="BaseResultMap" parameterType="com.example.log4j_slffj_project.dataobject.UserDOCriteria" id="selectByCriteriaWithRowbounds" >
+  <select resultMap="BaseResultMap" parameterType="com.example.log4j_slffj_project.dataobject.UsersDOCriteria" id="selectByCriteriaWithRowbounds" >
     select
     <if test="distinct" >
       distinct
