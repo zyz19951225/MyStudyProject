@@ -22,7 +22,7 @@ public class MainTest {
 
         System.out.println("--*--");
 
-        invoker = new Invoker(new ReciverWorkingCommand(receiver));
+        invoker.setCommand(new ReciverWorkingCommand(receiver));
         invoker.controller();
     }
 }
