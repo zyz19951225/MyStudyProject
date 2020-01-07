@@ -1,7 +1,9 @@
 package com.example.elasticsearch_project.test;
 
 import com.example.elasticsearch_project.entity.Commodity;
+import com.example.elasticsearch_project.entity.User;
 import com.example.elasticsearch_project.service.CommodityService;
+import com.example.elasticsearch_project.service.UserRepositoryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +22,48 @@ public class CjsElasticsearchExampleApplicationTests {
     private CommodityService commodityService;
 
     @Autowired
+    private UserRepositoryService userRepositoryService;
+
+    @Autowired
     public ElasticsearchTemplate elasticsearchTemplate;
 
     @Test
     public void contextLoads() {
         System.out.println(commodityService.count());
+    }
+
+    @Test
+    public void userSave() {
+        User user = new User();
+        user.setFristName("t");
+        user.setLastName("sx");
+        user.setUserName("tsx");
+        user.setId(2);
+        userRepositoryService.sava(user);
+    }
+    @Test
+    public void userSavez() {
+        User user = new User();
+        user.setFristName("zew");
+        user.setLastName("yez");
+        user.setUserName("asd");
+        User user2 = new User();
+        user2.setFristName("zew");
+        user2.setLastName("yez");
+        user2.setUserName("ddd");
+        userRepositoryService.sava(user);
+        userRepositoryService.sava(user2);
+    }
+
+    @Test
+    public void getUserByLastName(){
+        System.out.println("--*--");
+        userRepositoryService.getUserByLastName("asd");
+        System.out.println(userRepositoryService.getUserByLastName("asd"));
+        //System.out.println(userRepositoryService.getUserByLastName("ddd").getId());
+       // System.out.println(userRepositoryService.getUserByLastName("zzzzz").getId());
+        //System.out.println(userRepositoryService.getUserByLastName("2").getUserName());
+        System.out.println("--*--");
     }
 
     @Test

@@ -27,7 +27,6 @@ public class CommodityServiceImpl implements CommodityService {
 
     @Override
     public Commodity save(Commodity commodity) {
-
         return commodityRepository.save(commodity);
     }
 
@@ -40,6 +39,7 @@ public class CommodityServiceImpl implements CommodityService {
     public Iterable<Commodity> getAll() {
         return commodityRepository.findAll();
     }
+
 
     @Override
     public List<Commodity> getByName(String name) {
